@@ -56,5 +56,13 @@ public class TotalCostCalculatorTEST {
 
         }
     }
+    @ParameterizedTest
+    @CsvFileSource(resources = "/BoundaryTest.csv")
+    @DisplayName("Boundary tests")
+    void boundary(int initialCost,String State,ShippingType shipping, double expect ){
+        double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+        assertEquals(expect, actual);
+    }
+
 
 }
