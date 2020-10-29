@@ -4,37 +4,57 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TotalCostCalculatorTEST {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/WeakNormal.csv")
-    @DisplayName("weakNormal")
+    @DisplayName("Weak Normal")
     void weakNormal(int initialCost,String State,ShippingType shipping, double expect ){
-        assertEquals(initialCost, 55);
+        double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+        assertEquals(expect, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/WeakRobust.csv")
-    @DisplayName("weakRobust")
+    @DisplayName("Weak Robust")
     void weakRobust(int initialCost,String State,ShippingType shipping, double expect ){
-        assertEquals(initialCost, 55);
+        if (expect != -55){//test should not error out
+            double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+            assertEquals(expect, actual);
+        }
+        else{
+            assertThrows(NullPointerException.class,()->{
+                double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+                //fail();
+            });
+        }
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/StrongNormal.csv")
-    @DisplayName("StrongNormal")
+    @DisplayName("Strong Normal")
     void strongNormal(int initialCost,String State,ShippingType shipping, double expect ){
-        assertEquals(initialCost, 55);
+        double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+        assertEquals(expect, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/StrongRobust.csv")
-    @DisplayName("StrongRobust")
+    @DisplayName("Strong Robust")
     void strongRobust(int initialCost,String State,ShippingType shipping, double expect ){
-        assertEquals(initialCost, 55);
+        if (expect != -55){//test should not error out
+            double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+            assertEquals(expect, actual);
+        }
+        else{
+            assertThrows(NullPointerException.class,()->{
+                double actual = TotalCostCalculator.calculate(initialCost,State,shipping);
+
+            });
+
+        }
     }
 
 }
