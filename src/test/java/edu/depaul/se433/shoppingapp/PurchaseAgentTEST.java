@@ -14,8 +14,10 @@ import static org.mockito.Mockito.*;
 
 public class PurchaseAgentTEST {
 
+
+    // Ensure the zero works, ensure if there are any exceptions throne, ensure that None of the values are negative
     @Test
-    @DisplayName("Average of IL: 10, 55, 2000")
+    @DisplayName("Average Purchase")
     void test1(){
         List<Purchase> yo = new ArrayList<>();
         PurchaseDBO server = mock(PurchaseDBO.class);
@@ -46,36 +48,5 @@ public class PurchaseAgentTEST {
 
     }
 
-    @Test
-    @DisplayName("Average of AZ: 300, 3, 35")
-    void test2(){
-        List<Purchase> yo = new ArrayList<>();
-        PurchaseDBO server = mock(PurchaseDBO.class);
-        Purchase p1 = Purchase.make("a",
-                LocalDate.of(2020,8,29),
-                300,
-                "AZ",
-                "STANDARD");
-        Purchase p2 = Purchase.make("a",
-                LocalDate.of(2020,8,29),
-                3,
-                "AZ",
-                "STANDARD");
-        Purchase p3 = Purchase.make("a",
-                LocalDate.of(2020,8,29),
-                30,
-                "AZ",
-                "STANDARD");
-
-        yo.add(p1); yo.add(p2); yo.add(p3);
-        when(server.getPurchases()).thenReturn(yo);
-
-        PurchaseAgent test = new PurchaseAgent(server);
-        Double actual = test.averagePurchase();
-        verify(server,times(1)).getPurchases();
-
-        assertEquals(111,actual);
-
-    }
 
 }
